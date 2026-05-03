@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페브릿지 | 당신의 동네 카페가 완벽한 회의실이 됩니다</title>
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Pretendard Font -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cafe: {
+                            50: '#FDF8F5',
+                            100: '#F5EBE6',
+                            200: '#EBDCD3',
+                            300: '#DBC3B6',
+                            400: '#C7A593',
+                            500: '#AD816A',
+                            600: '#94664F',
+                            700: '#7A503C',
+                            800: '#634232',
+                            900: '#4D3428',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        /* FAQ Accordion Styles */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s ease-out;
+            opacity: 0;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 1rem;
+            padding-bottom: 1.25rem;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-cafe-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="fixed w-full bg-cafe-50/90 backdrop-blur-md z-50 border-b border-cafe-200">
+        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-cafe-800 font-bold text-xl">
+                <i data-lucide="coffee" class="w-6 h-6"></i>
+                <span>카페브릿지</span>
+            </div>
+            <a href="#preregister" class="bg-cafe-600 hover:bg-cafe-700 text-white px-5 py-2 rounded-full font-medium transition-colors text-sm">
+                사전예약하기
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                동네 카페가 <br class="md:hidden" /><span class="text-cafe-600">당신의 회의실</span>이 됩니다
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                매번 회의실 예약하기 힘드셨나요? 분위기 좋은 동네 카페에서 눈치 보지 않고 편안하게 미팅과 업무를 진행하세요.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#preregister" class="w-full sm:w-auto bg-cafe-600 hover:bg-cafe-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    지금 사전예약하기
+                </a>
+            </div>
+            <div class="mt-6 inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-cafe-100">
+                <div class="flex -space-x-2">
+                    <div class="w-6 h-6 rounded-full bg-cafe-200 border-2 border-white flex justify-center items-center text-xs">👤</div>
+                    <div class="w-6 h-6 rounded-full bg-cafe-300 border-2 border-white flex justify-center items-center text-xs">👤</div>
+                    <div class="w-6 h-6 rounded-full bg-cafe-400 border-2 border-white flex justify-center items-center text-xs">👤</div>
+                </div>
+                <p class="text-sm text-gray-600 font-medium">
+                    🔥 현재 <span class="text-cafe-600 font-bold">1,204명</span>이 사전예약했습니다!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Problem -->
+                <div class="space-y-6">
+                    <div class="inline-block bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-bold">문제점</div>
+                    <h2 class="text-3xl font-bold text-gray-900 leading-tight">
+                        답답한 스터디룸, 시끄러운 일반 카페...<br>마땅한 모임 공간 찾기 어려우셨죠?
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="x-circle" class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-600 text-lg">비싼 대관료를 지불해야 하는 전문 회의실</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="x-circle" class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-600 text-lg">오래 앉아있기 눈치 보이는 일반 카페</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="x-circle" class="w-6 h-6 text-red-500 flex-shrink-0 mt-0.5"></i>
+                            <span class="text-gray-600 text-lg">답답하고 삭막한 분위기의 스터디룸</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Solution -->
+                <div class="bg-cafe-100 p-8 rounded-3xl relative overflow-hidden border border-cafe-200 shadow-sm">
+                    <div class="absolute -top-6 -right-6 p-4 opacity-10">
+                        <i data-lucide="lightbulb" class="w-40 h-40"></i>
+                    </div>
+                    <div class="relative z-10 space-y-6">
+                        <div class="inline-block bg-cafe-600 text-white px-3 py-1 rounded-full text-sm font-bold">해결책</div>
+                        <h3 class="text-2xl font-bold text-gray-900">
+                            카페브릿지가 해결합니다!
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            우리는 유휴 공간이 있는 매력적인 로컬 카페와 공간이 필요한 모임/직장인을 연결합니다. 커피 한 잔 가격에 편안하고 당당한 업무 환경을 경험하세요.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section class="py-20 bg-cafe-50">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">카페브릿지만의 핵심 기능 3가지</h2>
+                <p class="text-gray-600 text-lg">당신의 완벽한 모임을 위한 최적의 서비스를 제공합니다.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-cafe-100 hover:shadow-md transition-shadow">
+                    <div class="w-14 h-14 bg-cafe-100 rounded-xl flex items-center justify-center mb-6 text-cafe-600">
+                        <i data-lucide="map-pin" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">내 주변 최적의 카페 매칭</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        위치 기반으로 현재 이용 가능한 가장 가까운 제휴 카페의 회의석을 실시간으로 확인하고 간편하게 예약할 수 있습니다.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-cafe-100 hover:shadow-md transition-shadow">
+                    <div class="w-14 h-14 bg-cafe-100 rounded-xl flex items-center justify-center mb-6 text-cafe-600">
+                        <i data-lucide="shield-check" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">눈치 보지 않는 당당함</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        앱을 통한 정식 예약 시스템으로, 카페 사장님과 눈치게임할 필요 없이 예약한 시간 동안 당당하게 이용하세요.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-cafe-100 hover:shadow-md transition-shadow">
+                    <div class="w-14 h-14 bg-cafe-100 rounded-xl flex items-center justify-center mb-6 text-cafe-600">
+                        <i data-lucide="coffee" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">음료가 포함된 합리적 가격</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        비싼 대관료 없이 1인 1음료 결제(또는 패키지 요금)만으로 훌륭한 업무 공간과 맛있는 커피를 동시에 즐길 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">경험해본 고객들의 생생한 후기</h2>
+                <p class="text-gray-600 text-lg">베타 테스트에 참여하신 분들의 이야기입니다.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-cafe-50 p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4 text-yellow-400">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"매주 진행하는 스터디 모임 장소 잡는 게 일이었는데, 카페브릿지 덕분에 예쁜 동네 카페에서 분위기 좋게 스터디를 할 수 있었어요. 만족도 200% 입니다!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-cafe-200 rounded-full flex items-center justify-center text-cafe-700 font-bold">김*지</div>
+                        <div>
+                            <div class="font-bold text-sm text-gray-900">IT 동아리 운영진</div>
+                            <div class="text-xs text-gray-500">20대, 대학생</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-cafe-50 p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4 text-yellow-400">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"재택근무 중에 가끔 기분전환이 필요할 때 이용합니다. 답답한 스터디카페보다 개방감 있고, 커피 맛도 훌륭해서 업무 효율이 훨씬 잘 오르는 것 같아요."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-cafe-200 rounded-full flex items-center justify-center text-cafe-700 font-bold">이*석</div>
+                        <div>
+                            <div class="font-bold text-sm text-gray-900">프리랜서 개발자</div>
+                            <div class="text-xs text-gray-500">30대, 직장인</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-cafe-50 p-6 rounded-2xl">
+                    <div class="flex items-center gap-1 mb-4 text-yellow-400">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <p class="text-gray-700 mb-6 italic">"고객 미팅할 때마다 조용한 프랜차이즈 카페 찾느라 진땀 뺐는데, 이제는 카페브릿지로 미리 예약하고 가니까 클라이언트 분들도 대접받는 느낌이라고 좋아하십니다."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-cafe-200 rounded-full flex items-center justify-center text-cafe-700 font-bold">박*영</div>
+                        <div>
+                            <div class="font-bold text-sm text-gray-900">영업직</div>
+                            <div class="text-xs text-gray-500">40대, 직장인</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-registration Form Section -->
+    <section id="preregister" class="py-20 bg-cafe-800 text-white relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">가장 먼저 서비스를 경험해보세요</h2>
+                <p class="text-cafe-200 text-lg">사전예약 시 오픈 기념 무료 이용권 1매를 드립니다.</p>
+            </div>
+            
+            <form id="waitlist-form" class="bg-white rounded-3xl p-8 md:p-10 shadow-2xl text-gray-800">
+                <div class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-2">이름 (또는 닉네임)</label>
+                        <input type="text" id="name" name="name" required placeholder="홍길동" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-cafe-500 focus:ring-2 focus:ring-cafe-200 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">이메일 주소</label>
+                        <input type="email" id="email" name="email" required placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-cafe-500 focus:ring-2 focus:ring-cafe-200 outline-none transition-all">
+                    </div>
+                    <div>
+                        <label for="source" class="block text-sm font-medium text-gray-700 mb-2">어떻게 알게 되셨나요?</label>
+                        <select id="source" name="source" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-cafe-500 focus:ring-2 focus:ring-cafe-200 outline-none transition-all appearance-none cursor-pointer">
+                            <option value="">선택해주세요</option>
+                            <option value="instagram">인스타그램 / 페이스북 광고</option>
+                            <option value="search">네이버 / 구글 검색</option>
+                            <option value="friend">지인 추천</option>
+                            <option value="community">온라인 커뮤니티</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-cafe-600 hover:bg-cafe-700 text-white font-bold py-4 rounded-xl transition-colors shadow-md text-lg mt-4 flex items-center justify-center gap-2">
+                        사전예약 완료하기
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                    <p class="text-xs text-gray-500 text-center mt-4">
+                        수집된 정보는 서비스 오픈 안내 용도로만 사용되며, 언제든 파기를 요청하실 수 있습니다.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-cafe-50">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">자주 묻는 질문</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-2xl border border-cafe-100 overflow-hidden shadow-sm">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-gray-900 text-lg">일반 카페와 무엇이 다른가요?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-cafe-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-600 bg-cafe-50/50">
+                        카페브릿지는 눈치 보지 않고 당당하게 카페 공간을 이용할 수 있도록 보장합니다. 제휴된 카페의 특정 구역을 미리 예약하여, 확정된 시간 동안 편안하게 업무나 미팅을 진행할 수 있습니다.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-2xl border border-cafe-100 overflow-hidden shadow-sm">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-gray-900 text-lg">결제는 어떻게 진행되나요?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-cafe-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-600 bg-cafe-50/50">
+                        앱 내에서 원하는 시간과 카페를 선택한 후, 해당 카페의 음료나 패키지를 결제하는 방식으로 이루어집니다. 별도의 추가 대관료는 발생하지 않습니다.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-2xl border border-cafe-100 overflow-hidden shadow-sm">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-bold text-gray-900 text-lg">서비스는 언제 정식 오픈하나요?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-cafe-500 faq-icon"></i>
+                    </button>
+                    <div class="faq-answer px-6 text-gray-600 bg-cafe-50/50">
+                        현재 베타 테스트를 준비 중이며, 올해 하반기 정식 앱 출시를 목표로 하고 있습니다. 사전예약자 분들께는 런칭 시 가장 먼저 알림을 보내드립니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cafe-900 text-cafe-200 py-12 border-t border-cafe-800">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2 font-bold text-xl text-white opacity-90">
+                    <i data-lucide="coffee" class="w-6 h-6"></i>
+                    <span>카페브릿지</span>
+                </div>
+                <div class="text-sm text-cafe-400 text-center md:text-right">
+                    <p>대표 이메일 : contact@cafebridge.kr</p>
+                    <p class="mt-2">© 2026 CafeBridge. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+                
+                const isOpen = answer.classList.contains('open');
+                
+                // Close all other accordions (Optional but good UX)
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('open');
+                    ans.previousElementSibling.querySelector('.faq-icon').classList.remove('open');
+                });
+
+                if (!isOpen) {
+                    answer.classList.add('open');
+                    icon.classList.add('open');
+                }
+            });
+        });
+
+        // Form Submit Logic
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const source = document.getElementById('source').value;
+
+            // TODO: Supabase 연결
+            // 여기에 Supabase 데이터베이스에 insert 하는 로직이 들어갈 예정입니다.
+            console.log('Form Submitted (Ready for Supabase):', { name, email, source });
+            
+            // 임시 성공 알림
+            alert('사전예약이 완료되었습니다! 런칭 시 알림을 보내드릴게요.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
